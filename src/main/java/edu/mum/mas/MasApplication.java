@@ -1,4 +1,4 @@
-package edu.mum.config;
+package edu.mum.mas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

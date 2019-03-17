@@ -1,4 +1,4 @@
-package edu.mum.config.domain;
+package edu.mum.mas.domain;
 
 import java.util.List;
 

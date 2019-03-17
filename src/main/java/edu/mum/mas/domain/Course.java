@@ -1,4 +1,4 @@
-package edu.mum.config.domain;
+package edu.mum.mas.domain;
 
 public class Course {
     private long id;
