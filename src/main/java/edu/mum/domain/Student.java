@@ -16,9 +16,6 @@ public class Student {
     private List<Role> roles;
     private List<Section> sections;
     private Session session;
-    public String getFirstName() {
-        return firstName;
-    }
     @Override
     public String toString() {
         return "Student{" +
@@ -123,4 +120,8 @@ public class Student {
     public void setSession(Session session) {
         this.session = session;
     }
+    public String getFirstName() {
+        return firstName;
+    }
+
 }
