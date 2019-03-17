@@ -1,4 +1,4 @@
-package edu.mum.mas.domain;
+package edu.mum.domain;
 
 public class Course {
     private long id;

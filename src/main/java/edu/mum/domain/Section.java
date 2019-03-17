@@ -1,4 +1,4 @@
-package edu.mum.mas.domain;
+package edu.mum.domain;
 
 import java.util.Date;
 import java.util.List;
