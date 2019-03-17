@@ -1,4 +1,4 @@
-package edu.mum.mas;
+package edu.mum.config;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
