@@ -1,0 +1,4 @@
+REPLACE INTO `role` VALUES (1,'ADMIN');
+REPLACE INTO `role` VALUES (2,'STUDENT');
+INSERT INTO USER (user_id, Active, EMAIL, PASSWORD)
+VALUES (3,1,'bruckgmk@gmail.com', '123456');

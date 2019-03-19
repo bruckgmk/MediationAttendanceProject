@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a style="padding-right: 2em;" class="navbar-brand" href="/">TM Registration System</a>
+    <!--<span style="color: #ffffff;"> &nbsp; | &nbsp;</span>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
+                <a class="nav-link" href="/studentlist">Students</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+
+    <h2>Student Info</h2> <br/>
+
+    <form action="#" th:action="@{/admin/student_save}" th:object="${student}"
+          method="post">
+        <fieldset>
+            <legend>Add a Student</legend>
+            <ul th:if="${#fields.hasErrors('*')}">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input
+                    is incorrect</li>
+            </ul>
+            <p>
+                <label for="id">Student ID</label> <input type="text" id="id" th:field="*{studentId}" />
+            <p th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}" th:errorclass="fieldError">student Id</p>
+            </p>
+            <p>
+                <label for="firstName">First Name:</label> <input type="text"
+                                                                  id= "firstName" th:field="*{firstName}" />
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="fieldError">Incorrect First Name</p>
+            </p>
+            <p>
+                <label for="lastName">Last Name:</label> <input type="text" id="lastName"
+                                                                th:field="*{lastName}" />
+            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="fieldError">Incorrect Last Name</p>
+            </p>
+
+            <p>
+                <label for="badgeCode">Badge Code: </label> <input type="text" id="badgeCode"
+                                                                   th:field="*{badgeCode}" />
+            <p th:if="${#fields.hasErrors('badgeCode')}" th:errors="*{badgeCode}" th:errorclass="fieldError">Incorrect Badge</p>
+            </p>
+            <p>
+                <label for="email">Email: </label> <input type="text" id="email"
+                                                          th:field="*{email}" />
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="fieldError">Incorrect Email</p>
+            </p>
+            <p>
+                <label for="nationality"> Nationality: </label> <input type="text" id="nationality"
+                                                                       th:field="*{nationality}" />
+            <p th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}" th:errorclass="fieldError">Incorrect Nationality</p>
+            </p>
+            <p>
+                <label for="phone"> Phone Number: </label> <input type="text" id="phone"
+                                                                  th:field="*{phone}" />
+            <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" th:errorclass="fieldError">Incorrect phone</p>
+            </p>
+            <p>
+                <label for="birthDate">Birth Date: </label> <input type="text" id="birthDate"
+                                                                   th:field="*{birthDate}" />
+            <p th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" th:errorclass="fieldError">Incorrect Birth Date</p>
+            </p>
+            <label for="entry">Entry: </label>
+            <select th:field="*{entry}" id="entry">
+                <option value="" label="Select Entry"></option>
+                <option th:each="entry:${entries}" th:value="${entry.id}" th:utext="${entry.month}+' '+${entry.year}"}>
+            </select>
+            <p>
+
+            </p>
+            <p id="buttons">
+                <input id="reset" type="reset"  value="Reset" tabindex="4"> &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="submit" type="submit" tabindex="5" value="Add Student"> &nbsp;&nbsp;&nbsp;
+                <a href="/admin/studentlist"  > Cancel </a>
+            </p>
+        </fieldset>
+    </form>
+    <br/>
+
+    <a href="/studentlist">Student List</a>
+
+
+</div>
+</body>
+</html>

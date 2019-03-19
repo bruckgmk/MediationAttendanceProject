@@ -9,7 +9,7 @@
                 <a class="navbar-brand" th:href="@{/}">
                     <img th:src="@{/images/logosvg.svg}" alt="MUM logo here"/>
                 </a>
-                <span sec:authorize="isAuthenticated()" style="display: inline-block;">
+                <span sec:authorize access="isAuthenticated()" style="display: inline-block;">
                     | Logged user: <span sec:authentication="name"></span> |
                     Role: <span sec:authentication="principal.authorities"></span> |
                     <a th:href="@{/logout}">Sign Out</a>

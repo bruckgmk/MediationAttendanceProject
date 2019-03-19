@@ -1,11 +1,15 @@
 package edu.mum.domain;
 
+import javax.persistence.*;
 import java.util.List;
-
+@Entity
 public class Block {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private int year;
     private int month;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Section> sections;
 
     public long getId() {

@@ -1,0 +1,80 @@
+<!DOCTYPE html >
+<html layout:decorator="shared/homelayout.html"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="Eyobeil">
+    <link rel="icon" href="favicon.ico">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
+    <title>register section</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a style="padding-right: 2em;" class="navbar-brand" href="/">TM Registration System</a>
+    <!--<span style="color: #ffffff;"> &nbsp; | &nbsp;</span>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
+                <a class="nav-link" href="/sectionlist">Sections</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<th:block layout:fragment="content">
+
+    <h2>Entry Info</h2> <br/>
+
+    <form action="#" th:action="@{/section_save}" th:object="${section}"
+          method="post">
+        <fieldset>
+            <legend>Add a Section</legend>
+            <ul th:if="${#fields.hasErrors('*')}">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input
+                    is incorrect</li>
+            </ul>
+            <p>
+                <label for="sectionName">Section Name:</label> <input type="text"
+                                                                  id= "sectionName" th:field="*{sectionName}" />
+            <p th:if="${#fields.hasErrors('sectionName')}" th:errors="*{sectionName}" th:errorclass="fieldError">Incorrect Section Name</p>
+            </p>
+            <p>
+                <label for="startDate">Starting Date:</label> <input type="text" id="startDate"
+                                                                th:field="*{startDate}" />
+            <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" th:errorclass="fieldError">Incorrect Date</p>
+            </p>
+            <p>
+                <label for="endDate">Ending Date:</label> <input type="text" id="endDate"
+                                                                     th:field="*{endDate}" />
+            <p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}" th:errorclass="fieldError">Incorrect Date</p>
+            </p>
+
+
+            <p id="buttons">
+                <input id="reset" type="reset"  value="Reset" tabindex="4"> &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="submit" type="submit" tabindex="5" value="Add Section"> &nbsp;&nbsp;&nbsp;
+                <a href="/sectionlist"  > Cancel </a>
+            </p>
+        </fieldset>
+    </form>
+    <br/>
+
+    <a href="/sectionlist">Section List</a>
+</th:block>
+
+<th:block layout:fragment="footer">
+</th:block>
+
+</body>
+</html>

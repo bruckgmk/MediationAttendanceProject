@@ -1,19 +1,39 @@
 package edu.mum.domain;
 
-public class Entry {
-    private Integer id;
-    private int month;
-    private int year;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
-    public Integer getId() {
+@Entity
+public class Entry {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
+    private Integer month;
+    @NotNull
+    private Integer year;
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Student> students;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getMonth() {
+    public Integer getMonth() {
         return month;
     }
 
@@ -21,7 +41,7 @@ public class Entry {
         this.month = month;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
@@ -29,9 +49,5 @@ public class Entry {
         this.year = year;
     }
 
-    public Entry(Integer id, int month, int year) {
-        this.id = id;
-        this.month = month;
-        this.year = year;
-    }
+
 }

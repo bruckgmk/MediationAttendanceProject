@@ -1,21 +1,47 @@
 package edu.mum.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Date;
 import java.util.List;
-
+@Entity
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
-    private int studentId;
-    private long badgeCode;
+    @NotNull
+    private Integer studentId;
+    @NotNull
+    private Long badgeCode;
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String nationality;
+    @NotEmpty
     private String phone;
+    @NotNull
+    @Past
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
     private Date birthDate;
-    private List<Entry> entries;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Entry entry;
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Role> roles;
-    private List<Section> sections;
+  @ManyToOne(cascade=CascadeType.ALL)
+    private Section section;
+    @ManyToOne(cascade= CascadeType.ALL)
     private Session session;
+    public String getFirstName() {
+        return firstName;
+    }
     @Override
     public String toString() {
         return "Student{" +
@@ -41,7 +67,7 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public int getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
@@ -49,7 +75,7 @@ public class Student {
         this.studentId = studentId;
     }
 
-    public long getBadgeCode() {
+    public Long getBadgeCode() {
         return badgeCode;
     }
 
@@ -89,14 +115,6 @@ public class Student {
         this.birthDate = birthDate;
     }
 
-    public List<Entry> getEntries() {
-        return entries;
-    }
-
-    public void setEntries(List<Entry> entries) {
-        this.entries = entries;
-    }
-
     public List<Role> getRoles() {
         return roles;
     }
@@ -105,13 +123,6 @@ public class Student {
         this.roles = roles;
     }
 
-    public List<Section> getSections() {
-        return sections;
-    }
-
-    public void setSections(List<Section> sections) {
-        this.sections = sections;
-    }
 
     public Session getSession() {
         return session;
@@ -120,8 +131,37 @@ public class Student {
     public void setSession(Session session) {
         this.session = session;
     }
-    public String getFirstName() {
-        return firstName;
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setBadgeCode(Long badgeCode) {
+        this.badgeCode = badgeCode;
+    }
+
+    public Entry getEntry() {
+        return entry;
+    }
+
+    public void setEntry(Entry entry) {
+        this.entry = entry;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }

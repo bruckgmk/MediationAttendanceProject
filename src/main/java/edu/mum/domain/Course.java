@@ -1,24 +1,45 @@
 package edu.mum.domain;
 
-public class Course {
-    private long id;
-    private int courseCode;
-    private String courseName;
-    private int credit;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
-    public long getId() {
+@Entity
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
+    private Integer courseCode;
+    @NotEmpty
+    private String courseName;
+    @NotNull
+    private Integer credit;
+    @OneToMany(cascade= CascadeType.ALL)
+    private List<Section> sections;
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getCourseCode() {
+    public Integer getCourseCode() {
         return courseCode;
     }
 
-    public void setCourseCode(int courseCode) {
+    public void setCourseCode(Integer courseCode) {
         this.courseCode = courseCode;
     }
 
@@ -30,11 +51,11 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public int getCredit() {
+    public Integer getCredit() {
         return credit;
     }
 
-    public void setCredit(int credit) {
+    public void setCredit(Integer credit) {
         this.credit = credit;
     }
 }

@@ -1,14 +1,34 @@
 package edu.mum.domain;
 
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
-
+@Entity
 public class Faculty {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String  lastName;
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String phone;
-    private  Section section;
+    @OneToMany
+    private List <Section> sections;
+    @ManyToMany
     private List<Role> roles;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -42,12 +62,13 @@ public class Faculty {
         this.phone = phone;
     }
 
-    public Section getSection() {
-        return section;
+
+    public List<Section> getSections() {
+        return sections;
     }
 
-    public void setSection(Section section) {
-        this.section = section;
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 
     public List<Role> getRoles() {
