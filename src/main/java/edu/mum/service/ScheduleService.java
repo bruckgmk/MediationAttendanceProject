@@ -10,7 +10,7 @@ public interface ScheduleService {
 
     public Schedule save(Schedule schedule);
 
-    public Schedule findById(Long scheduleId);
+    public Schedule findById(String scheduleId);
 
-    public void deleteById(Long id);
+    public void deleteById(String id);
 }

@@ -1,13 +1,40 @@
 package edu.mum.domain;
 
 import javax.persistence.*;
+import java.text.ParseException;
 
 @Entity
 public class Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  //  @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
     private String name;
+    @Column(nullable=false)
+    private String building;
+
+    @Column(nullable=true)
+    private String room;
+
+    @Column(nullable=false)
+    private int capacity;
+
+    public Location(String id, String name, String building, String room, int capacity) {
+        this.id = id;
+        this.name = name;
+        this.building = building;
+        this.room = room;
+        this.capacity = capacity;
+    }
+public Location() throws ParseException {
+
+}
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
     /*@OneToOne(cascade = CascadeType.ALL)
     private Section section;
     @OneToOne(cascade=CascadeType.ALL)
@@ -39,11 +66,19 @@ public class Location {
         this.section = section;
     }*/
 
-    public long getId() {
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

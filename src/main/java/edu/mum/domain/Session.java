@@ -1,34 +1,48 @@
 package edu.mum.domain;
 
+import edu.mum.util.DateUtil;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 @Entity
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
-    @DateTimeFormat(pattern="MM-dd-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date sessionDate;
-    @NotNull
-    private boolean attended;
-    @OneToOne
-    private Location location;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Student> students;
+    @Column(nullable=false)
+    @Temporal(TemporalType.TIME)
+    private Date time;
     @ManyToOne
-    private Block block;
+    private Location location;
     @ManyToOne
     private Schedule schedules;
+
+
     private String firstName;
     private String lastName;
     private Integer studentId;
-    private Long barcode;
+    private String barcode;
 
+    public Session(String barcode, LocalDate sessionDate, LocalTime time, Location location, Schedule schedules) {
+        setSessionDate(sessionDate);
+
+        setTime(time);
+
+        this.location = location;
+        this.schedules = schedules;
+        this.barcode = barcode;
+    }
+public Session(){
+
+}
     public Schedule getSchedules() {
         return schedules;
     }
@@ -39,11 +53,11 @@ public class Session {
 
 
 
-    public Long getBarcode() {
+    public String getBarcode() {
         return barcode;
     }
 
-    public void setBarcode(Long barcode) {
+    public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
 
@@ -71,14 +85,6 @@ public class Session {
         this.studentId = studentId;
     }
 
-    public Block getBlock() {
-        return block;
-    }
-
-    public void setBlock(Block block) {
-        this.block = block;
-    }
-
     public Long getId() {
         return id;
     }
@@ -91,16 +97,24 @@ public class Session {
         return sessionDate;
     }
 
-    public void setSessionDate(Date sessionDate) {
-        this.sessionDate = sessionDate;
+    public void setSessionDate(LocalDate sessionDate) {
+        this.sessionDate = DateUtil.convertLocalDateToDate(sessionDate);
     }
 
-    public boolean isAttended() {
+/*    public boolean isAttended() {
         return attended;
     }
 
     public void setAttended(boolean attended) {
         this.attended = attended;
+    }*/
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time =  this.time = DateUtil.convertLocalTimeToDate(time);
     }
 
     public Location getLocation() {
@@ -111,11 +125,11 @@ public class Session {
         this.location = location;
     }
 
-    public List<Student> getStudents() {
+/*    public List<Student> getStudents() {
         return students;
     }
 
     public void setStudents(List<Student> students) {
         this.students = students;
-    }
+    }*/
 }

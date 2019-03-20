@@ -25,12 +25,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule findById(Long scheduleId) {
+    public Schedule findById(String scheduleId) {
         return scheduleRepository.findById(scheduleId).get();
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
       scheduleRepository.deleteById(id);
     }
 }

@@ -33,8 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password("admin123").roles("ADMIN");
+
         auth.
                 jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
@@ -51,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/registration").permitAll()
+                .antMatchers("/check").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/h2").permitAll()
                 .antMatchers("/student/**").hasAuthority("STUDENT")

@@ -57,7 +57,7 @@ LocationService locationService;
     }
 
     @RequestMapping(value="/admin/schedule/scheduleedit/{id}", method = RequestMethod.GET)
-    public String editShedule(@PathVariable Long id, Model model){
+    public String editShedule(@PathVariable String id, Model model){
         Schedule schedule = scheduleService.findById(id);
         if (schedule != null) {
             model.addAttribute("schedule", schedule);
@@ -81,7 +81,7 @@ LocationService locationService;
         return "redirect:/admin/schedule/schedulelist";
     }
     @RequestMapping(value="/admin/schedule/scheduledelete/{id}", method=RequestMethod.GET)
-    public String deleteSchedule(@PathVariable("id") Long id){
+    public String deleteSchedule(@PathVariable("id") String id){
         scheduleService.deleteById(id);
         return "/admin/schedule/list";
     }
