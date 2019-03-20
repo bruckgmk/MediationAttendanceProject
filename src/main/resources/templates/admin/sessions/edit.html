@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a style="padding-right: 2em;" class="navbar-brand" href="/admin/dashboard">TM Registration System</a>
+    <!--<span style="color: #ffffff;"> &nbsp; | &nbsp;</span>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
+                <a class="nav-link" href="/admin/sessions/sessionlist">Sessions</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+    <form action="#" th:action="@{/admin/session/sessionedit}" th:object="${session}"
+          method="post">
+        <fieldset>
+            <legend>Add a Session</legend>
+            <ul th:if="${#fields.hasErrors('*')}">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input
+                    is incorrect</li>
+            </ul>
+            <p>
+                <label for="date">First Name:</label> <input type="text"
+                                                             id= "date" th:field="*{firstName}" />
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="fieldError">Incorrect name</p>
+            </p>
+            <p>
+                <label for="date">Last Name:</label> <input type="text"
+                                                            id= "date" th:field="*{lastName}" />
+            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="fieldError">Incorrect name</p>
+            </p>
+            <p>
+                <label for="date">Student Id:</label> <input type="text"
+                                                             id= "date" th:field="*{studentId}" />
+            <p th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}" th:errorclass="fieldError">Incorrect id</p>
+            </p>
+            <p>
+                <label for="student">Block: </label>
+                <select th:field="*{block}" id="student">
+                    <option value="" label="Select Block"></option>
+                    <option th:each="block:${blocks}" th:value="${block.id}" th:utext="${block.blockName} ">
+                </select>
+            </p>
+            <p>
+                <label for="location">Location: </label>
+                <select th:field="*{location}" id="location">
+                    <option value="" label="Select Location"></option>
+                    <option th:each="location:${locations}" th:value="${location.id}" th:utext="${location.name}">
+                </select>
+            </p>
+            <p>
+                <label for="sche">Schedule: </label>
+                <select th:field="*{schedules}" id="sche">
+                    <option value="" label="Select Schedule"></option>
+                    <option th:each="schedule:${schedules}" th:value="${schedule.id}" th:utext="${schedule.scheduletime}">
+                </select>
+            </p>
+
+
+            <p id="buttons">
+                <input id="reset" type="reset"  value="Reset" tabindex="4"> &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="submit" type="submit" tabindex="5" value="Add Session"> &nbsp;&nbsp;&nbsp;
+                <a href="/admin/session/sessionlist"  > Cancel </a>
+            </p>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

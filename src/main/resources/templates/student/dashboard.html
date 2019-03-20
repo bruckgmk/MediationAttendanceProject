@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico">
+    <title>Admin Dashboard</title>
+<body>
+<div layout:fragment="content" th:remove="tag"  >
+    <p>&nbsp;</p>
+    <div class="container">
+        <h3>Welcome to the Maharishi University of  Management </h3>
+        <hr/>
+        <p style="background-color: azure">
+            <p>
+                <label for="student">Block: </label>
+                <select id="student">
+                    <option value="" label="Select Block"></option>
+                    <option th:each="block:${blocks}" th:value="${block.id}" th:utext="${#temporals.format(block.blockName,'MMMM-yyyy')} ">
+                </select>
+            </p>
+
+    </div>
+
+</div>
+</body>
+</html>

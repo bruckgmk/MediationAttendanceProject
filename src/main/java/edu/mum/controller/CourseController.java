@@ -23,53 +23,46 @@ public class CourseController {
     CourseService courseService;
     @Autowired
     SectionService sectionService;
-    @RequestMapping(value="/courselist", method= RequestMethod.GET)
+    @RequestMapping(value="/admin/course/courselist", method= RequestMethod.GET)
     public String courses(Model model) {
 
         List<Course> courses = courseService.findAll();
         model.addAttribute("courses", courses);
-        return "courses/list";
+        return "admin/courses/list";
     }
 
-    @RequestMapping(value="/course_save", method = RequestMethod.GET)
+    @RequestMapping(value="/admin/course/course_save", method = RequestMethod.GET)
     public String studentRegistrationForm(@ModelAttribute("course") Course course, Model model){
-        List<Section> entrysections= (List<Section>)sectionService.findAll();
-        model.addAttribute("entrysections", entrysections);
-        return "courses/new";
+       // List<Section> entrysections= (List<Section>)sectionService.findAll();
+       // model.addAttribute("entrysections", entrysections);
+        return "admin/courses/new";
     }
 
-    @RequestMapping(value = "/course_save", method = RequestMethod.POST)
+    @RequestMapping(value = "admin/course/course_save", method = RequestMethod.POST)
     public String registerNewEntry(@Valid @ModelAttribute("course") Course course,
                                    BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "courses/new";
+            return "admin/courses/new";
         }
         course = courseService.save(course);
-        return "redirect:/courselist";
+        return "redirect:/admin/course/courselist";
     }
 
-    @RequestMapping(value="/courseedit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value="/admin/course/courseedit/{id}", method = RequestMethod.GET)
     public String editEntry(@PathVariable Long id, Model model){
         Course course = courseService.findById(id);
         if (course != null) {
             model.addAttribute("course", course);
             courseService.deleteById(id);
-            List<Section> sections= (List<Section>)sectionService.findAll();
-            model.addAttribute("sections", sections);
-            return "courses/edit";
+           // List<Section> sections= (List<Section>)sectionService.findAll();
+            //model.addAttribute("sections", sections);
+            return "admin/courses/edit";
         }
-        return "courses/list";
+        return "admin/courses/list";
     }
-    /*@RequestMapping(value = "/courseedit", method = RequestMethod.GET)
-    public String getEditForm(@ModelAttribute("course") Course course, Model model){
-        List<Section> sections= (List<Section>)sectionService.findAll();
-        model.addAttribute("sections", sections);
-        return "courses/edit";
-    }*/
 
-
-    @RequestMapping(value = "/courseedit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/course/courseedit", method = RequestMethod.POST)
     public String updateEntry(@Valid @ModelAttribute("course") Course course,
                               BindingResult bindingResult, Model model) {
         List<Section> sections= (List<Section>)sectionService.findAll();
@@ -77,14 +70,14 @@ public class CourseController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
 
-            return "courses/edit";
+            return "admin/courses/edit";
         }
         course = courseService.save(course);
-        return "redirect:courselist";
+        return "redirect:/admin/course/courselist";
     }
-    @RequestMapping(value="/coursedelete/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/admin/course/coursedelete/{id}", method=RequestMethod.GET)
     public String deleteEntry(@PathVariable("id") Long id){
         courseService.deleteById(id);
-        return "homepage/index";
+        return "admin/dashboard";
     }
 }

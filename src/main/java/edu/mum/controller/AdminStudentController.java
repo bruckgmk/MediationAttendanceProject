@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import edu.mum.domain.Block;
 import edu.mum.domain.Entry;
 import edu.mum.domain.Student;
+import edu.mum.service.BlockService;
 import edu.mum.service.EntryService;
 import edu.mum.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class AdminStudentController {
     private StudentService studentService;
     @Autowired
     private EntryService entryService;
+    @Autowired
+    BlockService blockService;
 
     @RequestMapping(value="/admin/studentlist", method=RequestMethod.GET)
     public String students(Model model) {
@@ -33,6 +37,13 @@ public class AdminStudentController {
         model.addAttribute("students", students);
         return "admin/list";
 
+    }
+    @RequestMapping(value="/student/block/blocks", method = RequestMethod.GET)
+    public String blockRegistrationForm(Model model){
+        List<Block> blocks= blockService.findAll();
+        System.out.println(blocks);
+        model.addAttribute("blocks", blockService.findAll());
+        return "/student/dashboard";
     }
 
     @RequestMapping(value="/admin/student_save", method = RequestMethod.GET)
@@ -63,11 +74,7 @@ public class AdminStudentController {
         }
         return "admin/list";
     }
-    /*@RequestMapping(value = "/studentedit", method = RequestMethod.GET)
-    public String getStudentEditForm(@ModelAttribute("student") Student student, Model model){
-        model.addAttribute("entries", (List<Entry>)entryService.findAll());
-        return "students/edit";
-    }*/
+
 
     @RequestMapping(value = "/admin/studentedit", method = RequestMethod.POST)
     public String updateStudent(@Valid @ModelAttribute("student") Student student,
@@ -83,6 +90,6 @@ public class AdminStudentController {
     @RequestMapping(value="/admin/studentdelete/{id}", method=RequestMethod.GET)
     public String deleteStudent(@PathVariable("id") Long id){
         studentService.deleteById(id);
-        return "homepage/index";
+         return "admin/dashboard";
     }
 }

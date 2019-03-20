@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a style="padding-right: 2em;" class="navbar-brand" href="/admin/dashboard">TM Registration System</a>
+    <!--<span style="color: #ffffff;"> &nbsp; | &nbsp;</span>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+        <div>
+            <span style="font-size: 1.5em">List of Registered Sessions</span>
+            <span style="float:right;">
+                <a class="btn btn-outline-success btn-lg" href="/admin/session/session_save">Register New Session</a>
+            </span>
+        </div>
+        <p>&nbsp;</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Session Date</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Student Id</th>
+                    <th scope="col">Attended</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="session,iterStat : ${sessions}">
+                    <th scope="row" th:text="${iterStat.count}"></th>
+                    <td th:text="${session.sessionDate}"></td>
+                    <td th:text="${session.firstName}"></td>
+                    <td th:text="${session.lastName}"></td>
+                    <td th:text="${session.studentId}"></td>
+                    <td th:text="${session.attended}"></td>
+                    <td>
+                        <a th:href="@{'/admin/session/sessionedit/' + ${session.sessionId}}">Edit</a>&nbsp;
+                        <a th:href="@{'/admin/session/sessiondelete/' + ${session.sessionId}}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+</body>
+</html>

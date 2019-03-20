@@ -26,8 +26,8 @@ public class Section {
     private Block block;
     @OneToOne(cascade = CascadeType.ALL)
     private Faculty faculty;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Location location;
+    /*@OneToOne(cascade = CascadeType.ALL)
+    private Location location;*/
 
     public Long getId() {
         return id;
@@ -85,11 +85,11 @@ public class Section {
         this.faculty = faculty;
     }
 
-    public Location getLocation() {
+   /* public Location getLocation() {
         return location;
     }
 
     public void setLocation(Location location) {
         this.location = location;
-    }
+    }*/
 }

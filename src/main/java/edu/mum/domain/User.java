@@ -2,16 +2,7 @@ package edu.mum.domain;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -25,13 +16,20 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private int id;
-	@Column(name = "email")
-	@NotEmpty(message = "*Please provide a email")
-	private String email;
+	@Column(name = "username")
+	@NotEmpty(message = "*Please provide a username")
+	private String username;
 	@Column(name = "password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
 	@NotEmpty(message = "*Please provide your password")
 	private String password;
+
+	@OneToOne(cascade = CascadeType.ALL)
+
+	private Student student;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Faculty faculty;
 
 	@Column(name = "active")
 	private int active;
@@ -47,12 +45,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -82,5 +80,19 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	public Student getStudent() {
+		return student;
+	}
 
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Faculty getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
+	}
 }

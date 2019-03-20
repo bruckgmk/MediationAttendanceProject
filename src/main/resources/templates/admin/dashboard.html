@@ -3,54 +3,30 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{fragments/layout}">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico">
     <title>Admin Dashboard</title>
-</head>
 <body>
-<div layout:fragment="content" th:remove="tag">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a style="padding-right: 2em;" class="navbar-brand" href="/">TM Registration System</a>
-        <!--<span style="color: #ffffff;"> &nbsp; | &nbsp;</span>-->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
-                    <a class="nav-link" href="/admin/student_save">Register Student</a>
-                </li>
-                <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
-                    <a class="nav-link" href="/admin/entry_save">Register Entry</a>
-                </li>
-                <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
-                    <a class="nav-link" href="/admin/faculty_save"> Register Faculty</a>
-                </li>
-                <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
-                    <a class="nav-link" href="/admin/section_save"> Register Section</a>
-                </li>
-                <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
-                    <a class="nav-link" href="/admin/course_save"> Register Course</a>
-                </li>
-
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-
+<div layout:fragment="content" th:remove="tag"  >
     <p>&nbsp;</p>
     <div class="container">
         <h3>Welcome to the Maharishi University of  Management </h3>
         <hr/>
-        <div style="font-size: 1em">
-            To create and manage the <a href="/admin/student_save">Students</a> of various <a href="/admin/entry/entry_save"> Entries </a> and <a href="/admin/faculties/faculty_save"> faculties</a> has many <a href="/admin/sections/section_save"> sections</a>, you also have to create <a href="/admin/courses/course_save"> courses</a> please first make sure to read the
-            instructions and key points provided below. And then click the
-            appropriate menu item, located on the menu-bar above.<br/><br/>
-            We come from many places, cultures, and backgrounds, but share a strong common commitment to personal inner growth, wellness, sustainability, and positive values.
-            Many of us have experienced the stress and negativity so common at other colleges. That's why we came to MUM!
-            We support a progressive and inclusive campus culture that’s creative, dynamic, and focused on making the world a better, more peaceful place.
+        <div style="background-color: azure">
+            Register The Following Entities:
+            <ul>
+                <li style="animation-play-state: running"><a href="/admin/student_save">Students</a></li>
+                <li><a href="/admin/entry/entry_save"> Entries Dates </a></li>
+                <li><a href="/admin/faculty/faculty_save"> University Faculties</a></li>
+                <li><a href="/admin/section/section_save"> Entry Sections</a></li>
+                <li><a href="/admin/course/course_save"> Student Courses</a></li>
+                <li><a href="/admin/block/block_save"> Blocks</a></li>
+                <li><a href="/admin/location/location_save"> Meditation Locations</a></li>
+                <li><a href="/admin/session/session_save"> Meditation Sessions</a></li>
+                <li><a href="/admin/schedule/schedule_save"> Meditation Schedule Time</a></li>
+            </ul>
         </div>
     </div>
 

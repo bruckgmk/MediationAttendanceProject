@@ -9,7 +9,7 @@
 <div layout:fragment="content" th:remove="tag">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a style="padding-right: 2em;" class="navbar-brand" href="/">TM Registration System</a>
+    <a style="padding-right: 2em;" class="navbar-brand" href="/admin/dashboard">TM Registration System</a>
     <!--<span style="color: #ffffff;"> &nbsp; | &nbsp;</span>-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
-                <a class="nav-link" href="/admin/studentlist">Students</a>
+                <a class="nav-link" href="/admin/entry/entrylist">Entries</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -36,17 +36,10 @@
                     is incorrect</li>
             </ul>
             <p>
-                <label for="month">Month:</label> <input type="text"
-                                                         id= "month" th:field="*{month}" />
-            <p th:if="${#fields.hasErrors('month')}" th:errors="*{month}" th:errorclass="fieldError">Incorrect Month</p>
+                <label for="date">Entry Date</label> <input type="text"
+                                                            id= "date" th:field="*{entryDate}" />
+            <p th:if="${#fields.hasErrors('entryDate')}" th:errors="*{entryDate}" th:errorclass="fieldError">Incorrect Date</p>
             </p>
-            <p>
-                <label for="year">Year:</label> <input type="text" id="year"
-                                                       th:field="*{year}" />
-            <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}" th:errorclass="fieldError">Incorrect Year</p>
-            </p>
-
-
             <p id="buttons">
                 <input id="reset" type="reset"  value="Reset" tabindex="4"> &nbsp;&nbsp;&nbsp;&nbsp;
                 <input id="submit" type="submit" tabindex="5" value="Add Entry"> &nbsp;&nbsp;&nbsp;

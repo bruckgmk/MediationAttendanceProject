@@ -17,10 +17,8 @@ public class Faculty {
     private String email;
     @NotEmpty
     private String phone;
-    @OneToMany
-    private List <Section> sections;
-    @ManyToMany
-    private List<Role> roles;
+    /*@OneToOne
+    private Section section;*/
 
     public Long getId() {
         return id;
@@ -62,20 +60,11 @@ public class Faculty {
         this.phone = phone;
     }
 
-
-    public List<Section> getSections() {
-        return sections;
+    /*public Section getSection() {
+        return section;
     }
 
-    public void setSections(List<Section> sections) {
-        this.sections = sections;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
+    public void setSection(Section section) {
+        this.section = section;
+    }*/
 }

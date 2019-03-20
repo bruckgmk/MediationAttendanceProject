@@ -3,6 +3,7 @@ package edu.mum.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -22,19 +23,20 @@ public class Student {
     @NotNull
     private Long badgeCode;
     @NotEmpty
+    @Email
     private String email;
     @NotEmpty
     private String nationality;
     @NotEmpty
     private String phone;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    private List<Role> roles;
     @NotNull
     @Past
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date birthDate;
     @ManyToOne(cascade = CascadeType.ALL)
     private Entry entry;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    private List<Role> roles;
   @ManyToOne(cascade=CascadeType.ALL)
     private Section section;
     @ManyToOne(cascade= CascadeType.ALL)
@@ -42,19 +44,7 @@ public class Student {
     public String getFirstName() {
         return firstName;
     }
-    @Override
-    public String toString() {
-        return "Student{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", studentId=" + studentId +
-                ", badgeCode=" + badgeCode +
-                ", email='" + email + '\'' +
-                ", nationality='" + nationality + '\'' +
-                ", phone='" + phone + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
-    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -115,15 +105,6 @@ public class Student {
         this.birthDate = birthDate;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-
     public Session getSession() {
         return session;
     }
@@ -164,4 +145,11 @@ public class Student {
         this.id = id;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 }

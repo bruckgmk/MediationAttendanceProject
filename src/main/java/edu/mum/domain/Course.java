@@ -16,16 +16,16 @@ public class Course {
     private String courseName;
     @NotNull
     private Integer credit;
-    @OneToMany(cascade= CascadeType.ALL)
-    private List<Section> sections;
+    /*@OneToMany(cascade= CascadeType.ALL)
+    private List<Section> sections;*/
 
-    public List<Section> getSections() {
+    /*public List<Section> getSections() {
         return sections;
     }
 
     public void setSections(List<Section> sections) {
         this.sections = sections;
-    }
+    }*/
 
     public Long getId() {
         return id;

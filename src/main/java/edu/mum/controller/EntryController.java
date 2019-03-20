@@ -70,6 +70,6 @@ public class EntryController {
     @RequestMapping(value="/admin/entry/entrydelete/{id}", method=RequestMethod.GET)
     public String deleteEntry(@PathVariable("id") Long id){
         entryService.deleteById(id);
-        return "homepage/index";
+        return "admin/dashboard";
     }
 }
