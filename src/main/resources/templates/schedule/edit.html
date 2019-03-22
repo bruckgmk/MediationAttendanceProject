@@ -27,31 +27,18 @@
         </form>
     </div>
 </nav>
-
-    <h2>Schedule Info</h2> <br/>
-
-    <form action="#" th:action="@{/admin/schedule/schedule_save}" th:object="${schedule}"
+    <form action="#" th:action="@{/admin/schedule/scheduleedit}" th:object="${schedule}"
           method="post">
         <fieldset>
-            <legend>Add a Schedule </legend>
+            <legend>Add a Location</legend>
             <ul th:if="${#fields.hasErrors('*')}">
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input
                     is incorrect</li>
             </ul>
             <p>
-                <label for="time">Session Id:</label>
-                <input type="text" id= "time" th:field="*{id}" />
-            <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" th:errorclass="fieldError">Incorrect Id</p>
-            </p>
-            <p>
-                <label for="time">Title:</label>
-                <input type="text" id= "time" th:field="*{title}" />
-            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:errorclass="fieldError">Incorrect Title</p>
-            </p>
-            <p>
                 <label for="time">Starting Time:</label>
-                <input type="text" id= "time" th:field="*{startingtime}" />
-            <p th:if="${#fields.hasErrors('startingtime')}" th:errors="*{startingtime}" th:errorclass="fieldError">Incorrect Time</p>
+                <input type="text" id= "time" th:field="*{staringtime}" />
+            <p th:if="${#fields.hasErrors('staringtime')}" th:errors="*{staringtime}" th:errorclass="fieldError">Incorrect Time</p>
             </p>
             <p>
                 <label for="time">Ending Time:</label>
@@ -65,14 +52,13 @@
                     <option th:each="location:${locations}" th:value="${location.id}" th:utext="${location.name} ">
                 </select>
             </p>
-            <!--<p>
+            <p>
                 <label for="Session">Sessions: </label>
                 <select th:field="*{session}" id="session">
                     <option value="" label="Select Schedule"></option>
                     <option th:each="session:${sessions}" th:value="${session.id}" th:utext="${schedule.sessionDate} ">
                 </select>
-            </p>-->
-
+            </p>
             <p id="buttons">
                 <input id="reset" type="reset"  value="Reset" tabindex="4"> &nbsp;&nbsp;&nbsp;&nbsp;
                 <input id="submit" type="submit" tabindex="5" value="Add Schedule"> &nbsp;&nbsp;&nbsp;
@@ -80,9 +66,6 @@
             </p>
         </fieldset>
     </form>
-    <br/>
-
-    <a href="/admin/schedule/schedulelist">Schedule  List</a>
 </div>
 </body>
 </html>

@@ -14,15 +14,17 @@
     <div class="container">
         <h3>Welcome to the Maharishi University of  Management </h3>
         <hr/>
+        <div class="panel-heading" style="float: right">
+            <h3><span th:utext="${userNames}"></span></h3>
+         <!--   <h3><span th:utext="${userBadge}"></span></h3>
+            <h3><span th:utext="${userId}"></span></h3>-->
+
+        </div>
         <p style="background-color: azure">
             <p>
-                <label for="student">Block: </label>
-                <select id="student">
-                    <option value="" label="Select Block"></option>
-                    <option th:each="block:${blocks}" th:value="${block.id}" th:utext="${#temporals.format(block.blockName,'MMMM-yyyy')} ">
-                </select>
+        <a th:href="@{/student/selectblock/{userId}(userId=${userId})/{userBadge}(userBadge=${userBadge})}"> click to enter your Block</a>
             </p>
-
+        <a th:href="@{/logout}">Sign Out</a>
     </div>
 
 </div>

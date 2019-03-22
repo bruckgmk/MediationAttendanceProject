@@ -1,6 +1,6 @@
 package edu.mum.util;
 
-//import edu.mum.cs.projects.attendance.domain.entity.CourseOffering;
+//import edu.mum.cs.projects.findSessionByBlockNameAndId.domain.entity.CourseOffering;
 
 import java.io.*;
 import java.util.HashMap;

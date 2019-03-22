@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.BindingResult;
@@ -24,10 +26,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
+import org.springframework.ui.Model;
 import edu.mum.service.UserService;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Controller
 public class LoginController {
 
@@ -99,7 +103,7 @@ public class LoginController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 
-
+        System.out.println("Role ID is "+user.getStudent().getFirstName()+" role is ");
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByUsername(user.getUsername());
         if (userExists != null) {
@@ -111,7 +115,7 @@ public class LoginController {
             modelAndView.setViewName("/registration");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", "User "+user.getStudent().getFirstName()+" has been registered successfully");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("/registration");
 
@@ -132,30 +136,49 @@ public class LoginController {
     }
 
     @RequestMapping(value={"/admin/dashboard"}, method = RequestMethod.GET)
-    public String adminDashboard(){
+    public String adminDashboard(@ModelAttribute("userNames") final Object mappingOb, @ModelAttribute("userId") final Object userId,  @ModelAttribute("userBadge") final Object userBadge,Model model){
+        model.addAttribute("userNames", mappingOb );
+        model.addAttribute("userBadge", userBadge);
+        model.addAttribute("userId", userId );
+        System.out.println("OOKK--badge");
+        System.out.println(userBadge.toString());
+        System.out.println(userId.toString());
         return "/admin/dashboard";
     }
     @RequestMapping(value={"/student/dashboard"}, method = RequestMethod.GET)
-    public String studentDashboard(){
+    public String studentDashboard(@ModelAttribute("userNames") final Object mappingOb, @ModelAttribute("userId") final Object userId,  @ModelAttribute("userBadge") final Object userBadge, Model model){
+        //model.addAllAttributes("userNames", );
+        model.addAttribute("userNames", mappingOb );
+        model.addAttribute("userBadge", userBadge);
+        model.addAttribute("userId", userId );
+        System.out.println("OOKK--badge");
+        System.out.println(userBadge.toString());
+        System.out.println(userId.toString());
         return "/student/dashboard";
     }
     @RequestMapping(value={"/dashboard"})
-    public String dashboardFilter(HttpServletRequest request){
+    public String dashboardFilter(HttpServletRequest request, RedirectAttributes redirectAttributes){
         Collection<? extends GrantedAuthority> authorities;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         authorities = auth.getAuthorities();
         String myRole = authorities.toArray()[0].toString();
         String admin = "admin";
+        String name = auth.getName();
+        User user = userService.findUserByUsername(name);
+        ModelAndView modelAndView = new ModelAndView();
+        redirectAttributes.addFlashAttribute("userNames", "Welcome " + user.getStudent().getFirstName() + " " + user.getStudent().getLastName());
+        System.out.println(name+" andm HAHAHAHAHA.....");
+        redirectAttributes.addFlashAttribute("userId", user.getStudent().getStudentId());
+        redirectAttributes.addFlashAttribute("userBadge", user.getStudent().getBadgeCode());
 
+        System.out.println(user.getStudent().getFirstName() +"WOWOWOWOWO.....");
         if(myRole.equals("ADMIN")){
-            String name = auth.getName();
-            User user = userService.findUserByUsername(name);
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("userNames", "Welcome " + user.getStudent().getFirstName() + " " + user.getStudent().getLastName());
-            System.out.println(name+" andm HAHAHAHAHA.....");
-            System.out.println(user.getStudent().getFirstName() +"WOWOWOWOWO.....");
+            modelAndView.setViewName("/admin/dashboard");
+            //return modelAndView;
             return "redirect:/admin/dashboard";
         }else{
+            modelAndView.setViewName("/student/dashboard");
+            //return modelAndView;
             //System.out.println(request.get)
             return "redirect:/student/dashboard";
         }

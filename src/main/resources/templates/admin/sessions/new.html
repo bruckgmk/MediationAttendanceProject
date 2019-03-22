@@ -30,18 +30,18 @@
 
     <h2>Session Info</h2> <br/>
 
-    <form action="#" th:action="@{/admin/session/session_save}" th:object="${session}"
+    <form action="#" th:action="@{/admin/session/session_save}" th:object="${ses}"
           method="post">
         <fieldset>
             <legend>Add a Session</legend>
-            <ul th:if="${#fields.hasErrors('*')}">
-                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input
-                    is incorrect</li>
-            </ul>
+
             <p>
-                <label for="date">Session Date:</label> <input type="text"
+                <label for="date">Session Date:</label> <input type="date"
                                                                   id= "date" th:field="*{sessionDate}" />
-            <p th:if="${#fields.hasErrors('sessionDate')}" th:errors="*{sessionDate}" th:errorclass="fieldError">Incorrect Date</p>
+            </p>
+            <p>
+                <label for="date">Session Time:</label> <input type="datetime-local"
+                                                               id= "text" th:field="*{time}" />
             </p>
             <p>
                 <label for="date">First Name:</label> <input type="text"
@@ -59,15 +59,9 @@
             <p th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}" th:errorclass="fieldError">Incorrect id</p>
             </p>
             <p>
-                <label for="attended">Attended:</label> <input type="checkbox" id="attended"
-                                                                th:field="*{attended}" />
-            <p th:if="${#fields.hasErrors('attended')}" th:errors="*{attended}" th:errorclass="fieldError">Fill Checkbox</p>
-            </p>
-            </p>
-            <p>
             <p>
                 <label for="student">Block: </label>
-                <select th:field="*{block}" id="student">
+                <select  id="student">
                     <option value="" label="Select Block"></option>
                     <option th:each="block:${blocks}" th:value="${block.id}" th:utext="${#temporals.format(block.blockName,'MMMM-yyyy')} ">
                 </select>

@@ -43,7 +43,7 @@ public class SessionController {
         return "admin/sessions/new";
     }
 
-    @RequestMapping(value = "/admin/session/section_save", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/session/session_save", method = RequestMethod.POST)
     public String registerNewFaculty(@Valid @ModelAttribute("session") Session session,
                                      BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

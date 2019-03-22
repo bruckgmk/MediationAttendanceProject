@@ -76,8 +76,6 @@ sessionRepository.deleteById(id);
 
         return getSessions()
                 .stream()
-
-
                 .collect(Collectors.toList());
     }
 
@@ -112,12 +110,11 @@ sessionRepository.deleteById(id);
 
                 // Removes duplicates
                 if(dataMap.containsKey(line)) {
-                    System.out.println("Duplicate line found in scanned barcode import: " + line);
+                    System.out.println("Duplicate line found in scanned barcode " + line);
                     continue;
                 }
                 else {
                     dataMap.put(line,  convertLineToSession(line));
-                    //barcodeRecordRepository.save(convertLineToBarcodeRecord(line));
                 }
             }
 
@@ -126,7 +123,7 @@ sessionRepository.deleteById(id);
             e.printStackTrace();
         }
         List<Session> result = new ArrayList(dataMap.values());
-        System.out.println("The list is "+result.get(2));
+        System.out.println("The list is "+result.size());
 
 
 
@@ -138,7 +135,7 @@ sessionRepository.deleteById(id);
 
             em.persist(br);
             if(index % 100==0) {
-                System.out.println("\nCommitting 100 Transactions...\n");
+                System.out.println(".. 100 Tx...");
                 em.getTransaction().commit();
                 em.getTransaction().begin();
             }
@@ -146,7 +143,7 @@ sessionRepository.deleteById(id);
         }
         em.getTransaction().commit();
 
-
+        System.out.println("The list is "+result.size());
         return dataMap.values();
     }
     private Session convertLineToSession(String line) {

@@ -15,6 +15,12 @@
         <h3>Welcome to the Maharishi University of  Management </h3>
         <hr/>
         <div style="background-color: azure">
+            <div class="panel-heading" style="float: right">
+                <h3><span th:utext="${userNames}"></span></h3>
+<!--                <h3><span th:utext="${userBadge}"></span></h3>
+                <h3><span th:utext="${userId}"></span></h3>-->
+
+            </div>
             Register The Following Entities:
             <ul>
                 <li style="animation-play-state: running"><a href="/admin/student_save">Students</a></li>
@@ -26,6 +32,9 @@
                 <li><a href="/admin/location/location_save"> Meditation Locations</a></li>
                 <li><a href="/admin/session/session_save"> Meditation Sessions</a></li>
                 <li><a href="/admin/schedule/schedule_save"> Meditation Schedule Time</a></li>
+                <li><a href="/admin/upload"> Upload File</a></li>
+                <li><a href="/admin/block/blockrest">Create Block Ajax</a></li>
+                <a th:href="@{/logout}">Sign Out</a>
             </ul>
         </div>
     </div>
